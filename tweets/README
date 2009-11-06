@@ -1,0 +1,16 @@
+download_tweets.rb will search for tweets and save them to MongoDB.  It will
+also download twitter avatars and store them in the database, too.
+
+sinatra_tweets.rb is a simple sinatra app for displaying and searching through
+the downloaded tweets. In addition to displaying tweets, it also serves the
+twitter avatars stored in the databse.
+
+These scripts require the following gems:
+ - mongo
+ - sinatra
+ - rubytter
+
+Also, make sure MongoDB is running.
+
+To download the tweets and start sinatra:
+  ruby sinatra_tweets.rb
