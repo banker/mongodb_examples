@@ -15,8 +15,8 @@ end
 
 get '/regex' do 
   @nyc     = DB.collection('nyc')
-  regex   = Regexp.new(params['regex'], true)
-  @tweets = @nyc.find(:text => regex)
+  regex    = Regexp.new(params['regex'], true)
+  @tweets  = @nyc.find(:text => regex)
   @count   = @tweets.count
   erb :tweets
 end
@@ -30,5 +30,6 @@ end
 
 get '/images/:id' do 
   content_type "image/jpeg"
-  GridStore.read(DB, params[:id].to_i)
+  filename = params[:id].downcase + ".jpg"
+  GridStore.read(DB, filename)
 end

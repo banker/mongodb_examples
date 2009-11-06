@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'rubytter'
+require 'twitter'
 require 'open-uri'
 
 require 'mongo'
@@ -16,21 +16,18 @@ DATABASE_NAME = "frank"
 # Clear the collection
 @nyc.remove
 
-# Twitter client
-@twitter = Rubytter.new
-
 (1..5).each do |page|
-  @twitter.search('nyc', :page => page).each do |tweet_hash|
-    @nyc.save(tweet_hash)
+  Twitter::Search.new('nyc').page(page).each do |tweet|
+    @nyc.save(tweet)
   end
 end
 
-@nyc.find.each do |cursor|
-  filename = cursor['user']['id']
+@nyc.find.each do |tweet|
+  filename = tweet['from_user'].downcase + ".jpg"
   next if GridStore.exist?(@db, filename) 
 
   GridStore.open @db, filename, 'w+' do |file|
-    data = open(cursor['user']['profile_image_url']).read
+    data = open(tweet['profile_image_url']).read
     file.content_type = 'image/jpeg'
     file.puts data
   end

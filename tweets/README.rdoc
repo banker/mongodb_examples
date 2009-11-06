@@ -8,7 +8,7 @@ twitter avatars stored in the databse.
 These scripts require the following gems:
  - mongo
  - sinatra
- - rubytter
+ - twitter
 
 Also, make sure MongoDB is running.
 

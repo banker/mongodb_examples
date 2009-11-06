@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <style>
+    body {
+      background-color: #DBD4C2;
+      width: 1000px;
+      margin: 50px auto;
+    }
+
+    form {
+      float: left;
+      width: 490px;
+    }
+
+    input,label {
+      font-size: 120%;
+    }
+  </style>
+</head>
+<body>
+
+
+  <form action='/regex' method='get'>
+    <p>
+    <label>Regex:</label>
+    <input name="regex" />
+    </p>
+
+    <input type="submit" value="Search" />
+  </form>
+
+  <form action='/time' method='get'>
+    <p>
+    <label>Time less than:</label>
+    <input name="time" />
+    </p>
+
+    <input type="submit" value="Search" />
+  </form>
+
+  <br />
+
+<h2>Results: <%= @count %> tweets.</h2>
+
+<% @tweets.each do |tweet| %>
+  <h2><%= tweet['text'] %></h2>
+  <p><%= tweet['from_user'] %></p>
+  <p><%= tweet['created_at'] %></p>
+  <img src="/images/<%= tweet['from_user'] %>" width='48'/>
+  <br />
+<% end %>
+
+</body>
+</html>
